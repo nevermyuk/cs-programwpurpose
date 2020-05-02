@@ -2,3 +2,8 @@
 .gitignore
 /out/*
 *.class
+*.iml
+*.zip
+*.png
+**/.idea/
+**/.lift/
