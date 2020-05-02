@@ -1,5 +1,4 @@
-/princeton-introcs.iml
-/.idea/
-/src/*.class
+*.xml
 .gitignore
 /out/*
+*.class
