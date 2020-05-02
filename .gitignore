@@ -1,4 +1,5 @@
 /princeton-introcs.iml
-/out/production/
 /.idea/
 /src/*.class
+.gitignore
+/out/*
