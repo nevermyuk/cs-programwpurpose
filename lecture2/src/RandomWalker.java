@@ -8,6 +8,7 @@ public class RandomWalker {
         int negativebound = -2*n;
         while (coordinate[0] != positivebound && coordinate[0] != negativebound && coordinate[1] != positivebound && coordinate[1] !=negativebound) {
             p = Math.random();
+
             if (p <= 0.25)
             {
                 coordinate[0]++;
