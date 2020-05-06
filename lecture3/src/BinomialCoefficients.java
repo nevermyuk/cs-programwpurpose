@@ -13,10 +13,22 @@ public class BinomialCoefficients {
 
         double[][] binomial = new double[n + 1][];
 
-        // initialize first row
+        // initialize first row , allocate space for 2. [ 0 1 2 ]
         binomial[1] = new double[1+2];
         binomial[1][1] = 1.0;
 
-
+        // fill in coefficients
+        for (int i = 2; i <= n; i++) {
+            binomial[i] = new double[i+2];
+            for (int j = 1; j < binomial[i].length - 1; j++) {
+                binomial[i][j] = 0.5 * (binomial[i-1][j-1] + binomial[i-1][j]);
+            }
+        }
+        for (int i = 1; i <= n ; i++) {
+            for (int j = 1; j < binomial[i].length - 1; j++) {
+                System.out.print(binomial[i][j] + " ");
+            }
+        System.out.println();
+        }
     }
 }
