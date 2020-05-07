@@ -16,11 +16,12 @@ public class DiscreteDistribution {
             sum[i] += sum[i-1];
         }
         // compute sum of all frequencies
-        for (int i = 0; i < m ;i++) {
+        for (int i = 0; i < m; i++) {
             // r is between 0 and Sn - 1
-            int r = (int)(Math.random() * (sum[n -1] -1));
+            int r = (int) (Math.random() * (sum[n -1] -1));
             // index  lesser than or equal to r. Between 1 and n.
             int index = 0;
+            // increase index until sum[index] less than or equal to r
             while (sum[index] <= r)
             {
                 index++;
