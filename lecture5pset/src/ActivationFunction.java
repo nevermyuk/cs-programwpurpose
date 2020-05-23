@@ -13,18 +13,26 @@ public class ActivationFunction {
     // Returns the sigmoid function of x.
     public static double sigmoid(double x) {
         if (Double.isNaN(x)) return Double.NaN;
-        return 1/(1+ Math.exp(-x));
+        double ret = 1/(1+ Math.exp(-x));
+        if (ret > 1) ret = 1.0;
+        if (ret < -1) ret = -1.0;
+        return ret;
     }
 
     // Returns the hyperbolic tangent of x.
     public static double tanh(double x) {
         if (Double.isNaN(x)) return Double.NaN;
-        return (Math.exp(x)-Math.exp(-x))/(Math.exp(x)+Math.exp(-x));
+        double ret = (Math.exp(x)-Math.exp(-x))/(Math.exp(x)+Math.exp(-x));
+        if (x >= 20) ret = 1.0;
+        if (x <= -20) ret = -1.0;
+        return ret;
     }
 
     // Returns the softsign function of x.
     public static double softsign(double x) {
         if (Double.isNaN(x)) return Double.NaN;
+        if (x == Double.POSITIVE_INFINITY) return 1.0;
+        if (x == Double.NEGATIVE_INFINITY) return -1.0;
         return x / (1 + Math.abs(x));
     }
 
@@ -33,8 +41,8 @@ public class ActivationFunction {
         if (Double.isNaN(x)) return Double.NaN;
         double ret = 0;
         if (x <= -2) ret = -1;
-        else if (x > -2 && x < 0) ret = x + (Math.pow(x,2)/4);
-        else if (x >= 0 && x < 2) ret = x -(Math.pow(x,2)/4);
+        else if (x > -2 && x < 0) ret = x + (Math.pow(x, 2)/4);
+        else if (x >= 0 && x < 2) ret = x -(Math.pow(x, 2)/4);
         else if (x >= 2) ret = 1.0;
         return ret;
     }

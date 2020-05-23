@@ -6,10 +6,11 @@
 
 public class AudioCollage {
     // Returns a new array that rescales a[] by multiplicative factor of alpha
-    public static double[] amplify(double[] a , double alpha)
+    public static double[] amplify(double[] a, double alpha)
     {
         double[] b = new double[a.length];
-        for (int i = 0; i < a.length ; i++) {
+        for (int i = 0; i < a.length; i++)
+        {
             b[i] = a[i] * alpha;
         }
         return b;
@@ -19,7 +20,7 @@ public class AudioCollage {
     public static double[] reverse(double[] a)
     {
         double [] b = new double[a.length];
-        for (int i = 0; i < a.length ; i++) {
+        for (int i = 0; i < a.length; i++) {
             b[i] = a[a.length - 1 - i];
         }
         return b;
@@ -33,7 +34,7 @@ public class AudioCollage {
         {
             c[i] = a[i];
         }
-        for (int i = a.length; i < a.length + b.length ; i++)
+        for (int i = a.length; i < a.length + b.length; i++)
         {
             c[i] = b[i - a.length];
         }
@@ -42,20 +43,33 @@ public class AudioCollage {
 
     // Returns a new array that is the sum of a[] and b[]
     // padding the shorter array
-    @SuppressWarnings("checkstyle:NoWhitespaceBefore")
     public static double[] mix(double[] a, double[] b)
     {
-        int length = Math.max(a.length,b.length);
-        double[] c = new double[length];
-        double[] d = new double[length];
-        // add padding for b array
-        for (int i = 0; i < length ;i++) {
-            if (i < b.length) c[i] = b[i];
+        int minlength = Math.min(a.length, b.length);
+        int maxlength = Math.max(a.length, b.length);
+        double[] shorter;
+        double[] longer;
+        if (a.length == minlength)
+        {
+            shorter = a;
+            longer = b;
+        }
+        else
+        {
+            shorter = b;
+            longer = a;
+        }
+        double[] c = new double[maxlength];
+        double[] d = new double[maxlength];
+
+        // add padding for shorter array
+        for (int i = 0; i < maxlength; i++) {
+            if (i < minlength) c[i] = shorter[i];
             else c[i] = 0.0;
         }
-        for (int i = 0; i < length ;i++)
+        for (int i = 0; i < maxlength; i++)
         {
-            d[i] = a[i] + c[i];
+            d[i] = c[i] + longer[i];
         }
         return d;
     }
@@ -77,11 +91,11 @@ public class AudioCollage {
     public static void main(String[] args) {
         double[] cow = StdAudio.read("cow.wav");
         double[] exposure = StdAudio.read("exposure.wav");
-        int alpha = 2;
-        StdAudio.play(amplify(cow,alpha));
+        double alpha = 1.2;
+        StdAudio.play(amplify(cow, alpha));
         StdAudio.play(reverse(cow));
-        StdAudio.play(merge(exposure,cow));
-        StdAudio.play(mix(exposure,cow));
-        StdAudio.play(changeSpeed(exposure,2));
+        StdAudio.play(merge(exposure, cow));
+        StdAudio.play(mix(exposure, cow));
+        StdAudio.play(changeSpeed(exposure, alpha));
     }
 }
