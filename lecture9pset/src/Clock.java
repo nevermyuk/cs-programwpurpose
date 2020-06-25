@@ -49,14 +49,25 @@ public class Clock {
     }
     public void toc(int delta)
     {
-
-
+        int minute = delta % 60;
+        int hour = (delta - minute) / 60;
+        if (this.minute + minute > 59)
+        {
+            this.minute = (this.minute + minute) % 60;
+            this.hour += 1;
+        }
+        else this.minute += minute;
+        if (this.hour + hour > 23)
+        {
+            this.hour = (this.hour + hour) % 24;
+        }
+        else this.hour += hour;
     }
     public static void main(String[] args)
     {
-        Clock test = new Clock("13:59");
+        Clock test = new Clock("12:00");
         Clock test2 = new Clock("00:45");
-        test.tic();
+        test.toc(4320);
         StdOut.println(test);
     }
 }
