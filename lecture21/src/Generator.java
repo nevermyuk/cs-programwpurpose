@@ -5,6 +5,7 @@ public class Generator {
             int t = StdRandom.uniform(alpha.length());
             a[i] = alpha.charAt(t);
         }
+        
         return new String(a);
     }
 
