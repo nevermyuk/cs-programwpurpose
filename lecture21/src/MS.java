@@ -36,7 +36,6 @@ public class MS {
     private static String[] aux;
 
     public static void merge(String[] a, int low, int middle, int high) {
-
         int i = low, j = middle, N = high - low;
         for (int k = 0; k < N; k++) {
             if (i == middle) aux[k] = a[j++];
